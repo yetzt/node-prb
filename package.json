@@ -1,0 +1,25 @@
+{
+  "name": "prb",
+  "version": "0.0.1",
+  "description": "a simple and dependency free terminal progress bar",
+  "main": "index.js",
+  "author": "yetzt <node-prb@yetzt.me>",
+  "license": "Unlicense",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yetzt/node-prb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yetzt/node-prb/issues"
+  },
+  "homepage": "https://github.com/yetzt/node-prb",
+  "keywords": [
+    "terminal",
+    "progress",
+    "bar",
+    "progressbar",
+    "indicator",
+    "console",
+    "term"
+  ]
+}
