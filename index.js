@@ -62,21 +62,3 @@ const pbr = module.exports = function pbr(max, opt){
 		
 	};
 };
-
-const bar = pbr(100, {
-	prefix: "test",
-	precision: 2,
-	char: '█'
-
-})
-
-let n = 0;
-console.log("start");
-setInterval(function(){
-	n += Math.random();
-	bar(n);
-	if (n > 100) {
-		clearInterval(this);
-		console.log("complete");
-	}
-},10);
