@@ -1,6 +1,6 @@
 {
   "name": "prb",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "a simple and dependency free terminal progress bar",
   "main": "index.js",
   "author": "yetzt <node-prb@yetzt.me>",

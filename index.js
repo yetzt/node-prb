@@ -29,7 +29,7 @@ const pbr = module.exports = function pbr(max, opt){
 			if (self.percentstr !== percentstr) {
 				self.percentstr = percentstr;
 
-				process.stdout.write("\r")
+				process.stdout.write("\r");
 
 				let barwidth = process.env.COLUMNS || process.stdout.columns || 80;
 				barwidth -= (self.percentstr.length + 1);
@@ -38,13 +38,7 @@ const pbr = module.exports = function pbr(max, opt){
 					barwidth -= self.prefix.length+1;
 					process.stdout.write(self.prefix+" ");
 				}
-				process.stdout.write(self.percentstr+" ");
-				
-				
-				let barchars = Math.round(barwidth * ratio);
-				let blankchars = barwidth - barchars;
-		
-				process.stdout.write(self.char.repeat(barchars));
+				process.stdout.write(self.percentstr+" "+self.char.repeat(Math.round(barwidth * ratio))+"\r");
 				
 			}
 
