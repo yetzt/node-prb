@@ -1,6 +1,6 @@
 
-const pbr = module.exports = function pbr(max, opt){
-	if (!this instanceof pbr) return new pbr(max, opt);
+const prb = module.exports = function prb(max, opt){
+	if (!this instanceof prb) return new prb(max, opt);
 	
 	opt = opt || {};
 	

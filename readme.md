@@ -1,14 +1,14 @@
-# pbr
+# prb
 
-`pbr` is a very small, simple and dependency-free terminal progress bar. it conforms to your terminal width and downgrades to just an output when complete in a pipe.
+`prb` is a very small, simple and dependency-free terminal progress bar. it conforms to your terminal width and downgrades to just an output when complete in a pipe.
 
 ## usage example
 
 ``` javascript
 
-const pbr = require("pbr");
+const prb = require("prb");
 
-const bar = pbr(100, {
+const bar = prb(100, {
 	prefix: "test",
 	precision: 2,
 	char: '█',
