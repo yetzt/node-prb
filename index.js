@@ -9,6 +9,7 @@ const pbr = module.exports = function pbr(max, opt){
 	self.precision = opt.precision || 0;
 	self.prefix = opt.prefix || "";
 	self.char = opt.char || "="; // '█'
+	self.width = opt.width || null;
 	
 	self.complete = false;
 	self.percentstr = null;
@@ -31,7 +32,7 @@ const pbr = module.exports = function pbr(max, opt){
 
 				process.stdout.write("\r");
 
-				let barwidth = process.env.COLUMNS || process.stdout.columns || 80;
+				let barwidth = opt.width || process.env.COLUMNS || process.stdout.columns || 80;
 				barwidth -= (self.percentstr.length + 1);
 
 				if (!!self.prefix) {

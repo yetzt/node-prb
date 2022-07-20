@@ -11,8 +11,8 @@ const pbr = require("pbr");
 const bar = pbr(100, {
 	prefix: "test",
 	precision: 2,
-	char: '█'
-
+	char: '█',
+	width: 80, // optional: bar width; default: tty columns
 })
 
 let n = 0;
