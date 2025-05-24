@@ -14,6 +14,7 @@ const bar = prb(100, {
 	char: '█',
 	width: 80, // optional: bar width; default: tty columns
 	stream: process.stderr, // optional, default: process.stderr
+	hidecursor: false, // optional, default: true
 })
 
 let n = 0;

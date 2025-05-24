@@ -10,7 +10,8 @@ const prb = module.exports = function prb(max, opt){
 	self.prefix = opt.prefix || "";
 	self.char = opt.char || "="; // '█'
 	self.width = opt.width || null;
-	
+	self.cursor = (opt.hidecursor === false);
+
 	self.complete = false;
 	self.percentstr = null;
 	self.value = 0;
@@ -18,6 +19,9 @@ const prb = module.exports = function prb(max, opt){
 	self.stream = (opt.stream || process.stderr);
 
 	self.percentagewidth = (self.precision > 0) ? 5+self.precision : 4;
+
+	// disable cursor
+	if (!self.cursor && self.stream.isTTY) this.stream.write('\x1B[?25l');
 
 	return function update(value){
 		if (self.complete) return;
@@ -54,7 +58,7 @@ const prb = module.exports = function prb(max, opt){
 
 			self.stream.write("\n"); // final newline
 			self.complete = true; // no more updates
-			self.stream.write('\x1B[?25h'); // re-enable cursor
+			if (!self.cursor) self.stream.write('\x1B[?25h'); // re-enable cursor
 		}
 		
 	};
