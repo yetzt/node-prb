@@ -15,8 +15,8 @@ const prb = module.exports = function prb(max, opt){
 	self.percentstr = null;
 	self.value = 0;
 
-	self.percentagewidth = (precision > 0) ? 5+precision : 4;
-		
+	self.percentagewidth = (self.precision > 0) ? 5+self.precision : 4;
+
 	return function update(value){
 		if (self.complete) return;
 		
