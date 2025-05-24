@@ -1,14 +1,14 @@
 
 const prb = module.exports = function prb(max, opt){
 	if (!this instanceof prb) return new prb(max, opt);
-	
+
 	opt = opt || {};
-	
+
 	const self = this;
 	self.max = max;
 	self.precision = opt.precision || 0;
 	self.prefix = opt.prefix || "";
-	self.char = opt.char || "="; // '█'
+	self.char = opt.char || "="; // '█', '▬'
 	self.width = opt.width || null;
 	self.cursor = (opt.hidecursor === false);
 
@@ -25,14 +25,14 @@ const prb = module.exports = function prb(max, opt){
 
 	return function update(value){
 		if (self.complete) return;
-		
+
 		self.value = value||0;
 
 		if (self.stream.isTTY) { // only if tty
 
 			let ratio = Math.min((self.value / self.max), 1);
 			let percentstr = ((ratio*100).toFixed(self.precision)+"%").padStart(self.percentagewidth, ' ');
-		
+
 			if (self.percentstr !== percentstr) {
 				self.percentstr = percentstr;
 
@@ -46,10 +46,11 @@ const prb = module.exports = function prb(max, opt){
 					self.stream.write(self.prefix+" ");
 				}
 				self.stream.write(self.percentstr+" "+self.char.repeat(Math.round(barwidth * ratio))+"\r");
+
 			}
 
 		}
-		
+
 		if (value >= max) {
 			if (!self.stream.isTTY) { // if not a tty, just print when complete
 				if (self.prefix) self.stream.write(self.prefix+" ");
@@ -60,6 +61,6 @@ const prb = module.exports = function prb(max, opt){
 			self.complete = true; // no more updates
 			if (!self.cursor) self.stream.write('\x1B[?25h'); // re-enable cursor
 		}
-		
+
 	};
 };

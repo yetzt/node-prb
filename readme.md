@@ -11,7 +11,7 @@ const prb = require("prb");
 const bar = prb(100, {
 	prefix: "test",
 	precision: 2,
-	char: '█',
+	char: '▬',
 	width: 80, // optional: bar width; default: tty columns
 	stream: process.stderr, // optional, default: process.stderr
 	hidecursor: false, // optional, default: true
@@ -32,7 +32,7 @@ setInterval(function(){
 
 ```
 start
-test 100.00% ██████████████████████████████████████████████████████████████████
+test 100.00% ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 complete
 ```
 
