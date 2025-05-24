@@ -13,7 +13,7 @@ const bar = prb(100, {
 	precision: 2,
 	char: '█',
 	width: 80, // optional: bar width; default: tty columns
-	stream: process.stderr, // optiona, default: process.stderr
+	stream: process.stderr, // optional, default: process.stderr
 })
 
 let n = 0;
