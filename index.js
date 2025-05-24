@@ -15,14 +15,16 @@ const prb = module.exports = function prb(max, opt){
 	self.percentstr = null;
 	self.value = 0;
 
+	self.stream = (opt.stream || process.stderr);
+
 	self.percentagewidth = (self.precision > 0) ? 5+self.precision : 4;
 
 	return function update(value){
 		if (self.complete) return;
 		
 		self.value = value||0;
-		
-		if (process.stdout.isTTY) { // only if tty
+
+		if (self.stream.isTTY) { // only if tty
 
 			let ratio = Math.min((self.value / self.max), 1);
 			let percentstr = ((ratio*100).toFixed(self.precision)+"%").padStart(self.percentagewidth, ' ');
@@ -30,29 +32,29 @@ const prb = module.exports = function prb(max, opt){
 			if (self.percentstr !== percentstr) {
 				self.percentstr = percentstr;
 
-				process.stdout.write("\r");
+				self.stream.write("\r");
 
-				let barwidth = opt.width || process.env.COLUMNS || process.stdout.columns || 80;
+				let barwidth = opt.width || process.env.COLUMNS || self.stream.columns || 80;
 				barwidth -= (self.percentstr.length + 1);
 
 				if (!!self.prefix) {
 					barwidth -= self.prefix.length+1;
-					process.stdout.write(self.prefix+" ");
+					self.stream.write(self.prefix+" ");
 				}
-				process.stdout.write(self.percentstr+" "+self.char.repeat(Math.round(barwidth * ratio))+"\r");
-				
+				self.stream.write(self.percentstr+" "+self.char.repeat(Math.round(barwidth * ratio))+"\r");
 			}
 
 		}
 		
 		if (value >= max) {
-			if (!process.stdout.isTTY) { // if not a tty, just print when complete
-				if (self.prefix) process.stdout.write(self.prefix+" ");
-				process.stdout.write((100).toFixed(self.precision)+"%");
+			if (!self.stream.isTTY) { // if not a tty, just print when complete
+				if (self.prefix) self.stream.write(self.prefix+" ");
+				self.stream.write((100).toFixed(self.precision)+"%");
 			}
 
-			process.stdout.write("\n"); // final newline
+			self.stream.write("\n"); // final newline
 			self.complete = true; // no more updates
+			self.stream.write('\x1B[?25h'); // re-enable cursor
 		}
 		
 	};
